@@ -14,13 +14,13 @@ class component(object):
         db_component.commit()
         cursor.close()
 
-    def select_data(self):
-        sql = "select name,brief_introduction,location,counts FROM component"
-        cursor = db_component.cursor()
-        cursor.execute(sql)
-        db_component.commit()
-        date = cursor.fetchall()
-        cursor.close()
-        return date
 
 
+def select_data():
+    sql = "select name,brief_introduction,location,counts FROM component"
+    cursor = db_component.cursor()
+    cursor.execute(sql)
+    db_component.commit()
+    date = cursor.fetchall()
+    cursor.close()
+    return date
