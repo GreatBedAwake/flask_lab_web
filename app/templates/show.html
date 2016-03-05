@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% block content %}
+    <div class="container">
+	<div class="row">
+		<div class="span12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							型号
+						</th>
+						<th>
+							简介
+						</th>
+						<th>
+						    位置
+						</th>
+						<th>
+						    数量
+						</th>
+					</tr>
+				</thead>
+                <tbody>
+                    {% for data in component %}
+                        <tr>
+                            <td>{{ data[0] }}</td>
+                            <td>{{ data[1] }}</td>
+                            <td>{{ data[2] }}</td>
+                            <td>{{ data[3] }}</td>
+                        </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
