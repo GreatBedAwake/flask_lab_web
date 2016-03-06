@@ -1,5 +1,5 @@
 from app import db_component
-
+import sqlite3
 class component(object):
     def __init__(self,name,brief_introduction,location,counts):
         self.name = name
@@ -17,10 +17,30 @@ class component(object):
 
 
 def select_data():
+    db_component = sqlite3.connect("components.db")
     sql = "select name,brief_introduction,location,counts FROM component"
     cursor = db_component.cursor()
     cursor.execute(sql)
     db_component.commit()
     date = cursor.fetchall()
     cursor.close()
+    db_component.close()
     return date
+def select_where_db(name):
+    db_component = sqlite3.connect("components.db")
+    sql = "select * FROM component WHERE name = ?"
+    cursor = db_component.cursor()
+    cursor.execute(sql,[name])
+    db_component.commit()
+    date = cursor.fetchall()
+    cursor.close()
+    db_component.close()
+    return date
+def update_db(name,value):
+    db_component = sqlite3.connect("components.db")
+    sql='update component SET counts = counts-? where name=?'
+    cursor=db_component.cursor()
+    cursor.execute(sql,[value,name])
+    db_component.commit()
+    cursor.close()
+    db_component.close()

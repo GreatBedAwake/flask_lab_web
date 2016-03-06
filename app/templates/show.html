@@ -22,12 +22,16 @@
 				</thead>
                 <tbody>
                     {% for data in component %}
-                        <tr>
-                            <td>{{ data[0] }}</td>
-                            <td>{{ data[1] }}</td>
-                            <td>{{ data[2] }}</td>
-                            <td>{{ data[3] }}</td>
-                        </tr>
+                        <form class="form-horizontal" method="post">
+                            <tr>
+                                <td><input value="{{ data[0] }}" name="name" type="hidden"> {{ data[0] }}</td>
+                                <td>{{ data[1] }}</td>
+                                <td>{{ data[2] }}</td>
+                                <td>{{ data[3] }}</td>
+                                <td><input name="count" type="text"></td>
+                                <td><button type="submit" class="btn-block">选择</button></td>
+                            </tr>
+                        </form>
                     {% endfor %}
 				</tbody>
 			</table>

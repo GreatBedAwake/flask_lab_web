@@ -1,0 +1,14 @@
+<html>
+<body>
+{% for data in component %}
+    <tr>
+        <td>{{ data[0] }}</td>
+        <td>{{ data[1] }}</td>
+        <td>{{ data[2] }}</td>
+        <td>{{ data[3] }}</td>
+        <br/>
+    </tr>
+{% endfor %}
+<form class="form-horizontal"  method="post"><button type="submit" >提交</button></form>
+</body>
+</html>
