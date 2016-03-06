@@ -1,13 +1,15 @@
 from app import db_component
 import sqlite3
 class component(object):
-    def __init__(self,name,brief_introduction,location,counts):
+    def __init__(self,name,brief_introduction=' ',location='00',counts=0):
         self.name = name
         self.brief_introduction = brief_introduction
         self.location = location
         self.counts = counts
 
+
     def insert_data(self):
+        db_component = sqlite3.connect("components.db")
         sql = "insert into component (name,brief_introduction,location,counts) VALUES (?,?,?,?)"
         cursor = db_component.cursor()
         cursor.execute(sql,[self.name,self.brief_introduction,self.location,self.counts])

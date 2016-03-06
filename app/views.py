@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template,request,make_response,redirect,url_for,session
-from app.models import select_data,select_where_db
+from app.models import select_data,select_where_db,update_db,component
 import re
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -49,6 +49,7 @@ def show_db():
         session['shop']=sessionshop
     dates = select_data()
     return  render_template("show.html",component = dates)
+
 @app.route('/shop',methods=['POST','GET'])
 def shop():
     if 'shop' in session:
@@ -63,7 +64,23 @@ def shop():
             h[3]=count[i]
             component.append(h)
             i=i+1
+        if request.method=='POST':
+            i=0
+            for data in name:
+                update_db(data,count[i])
+                i=i+1
+            session['shop']=';'
 
         return render_template("gouwuche.html",component=component)
     else:
         return 'no shop'
+@app.route('/add',methods=['POST','GET'])
+def add():
+    if request.method=='POST':
+        name=request.form['name']
+        bi=request.form['brief_introduction']
+        location=request.form['location']
+        counts=request.form['counts']
+        m=component(name,bi,location,counts)
+        m.insert_data()
+    return render_template("add.html")
