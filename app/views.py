@@ -42,12 +42,20 @@ def login():
 @app.route('/show',methods=['POST','GET'])
 def show_db():
     if request.method == 'POST':
-        name = request.form['name']
-        count = request.form['count']
-        cookies=name+','+count+';'
-        sessionshop=session['shop']+cookies
-        session['shop']=sessionshop
-    dates = select_data()
+        #return 'find'
+        #find_component=[]
+        try:
+            find_component=request.form['find_component']
+            dates=select_where_db(find_component)
+        except KeyError:
+            name = request.form['name']
+            count = request.form['count']
+            cookies=name+','+count+';'
+            sessionshop=session['shop']+cookies
+            session['shop']=sessionshop
+            dates = select_data()
+    else:
+        dates = select_data()
     return  render_template("show.html",component = dates)
 
 @app.route('/shop',methods=['POST','GET'])
