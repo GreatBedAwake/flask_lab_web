@@ -42,12 +42,10 @@ def login():
 @app.route('/show',methods=['POST','GET'])
 def show_db():
     if request.method == 'POST':
-        #return 'find'
-        #find_component=[]
-        try:
+        if 'find_component' in request.form:
             find_component=request.form['find_component']
             dates=select_where_db(find_component)
-        except KeyError:
+        else:
             name = request.form['name']
             count = request.form['count']
             cookies=name+','+count+';'
